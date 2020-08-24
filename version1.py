@@ -4,7 +4,7 @@ import os.path
 
 def morning_shift(count, rtp_engineers, mex_engineers):
     shift = []
-    for x in range(0,int(count/2)):
+    for x in range(0, math.floor(count/2)):
         shift.append(rtp_engineers.pop(0))
         shift.append(mex_engineers.pop(0))
     return shift, rtp_engineers, mex_engineers
@@ -99,7 +99,7 @@ if __name__ == "__main__":
 
         total_count = len(rtp_engineers) + len(mex_engineers)
         morning_shift_count = 12
-        second_shift_count = int((total_count-morning_shift_count)/2) + 1
+        second_shift_count = math.floor((total_count-morning_shift_count)/2) + 1
         third_shift_count = (total_count-morning_shift_count) - second_shift_count
 
 
