@@ -1,4 +1,4 @@
-import sys
+import math
 import random
 import os.path
 
@@ -23,106 +23,25 @@ def shift_rotate(shift, rotation_number):
     return shift
 
 def print_to_file_shift(morning_shift, second_shift, third_shift):
+    SHIFTS=("Morning Shift", "2nd Shift", "3rd Shift")
+    DAYS=('Monday','Tuesday','Wednesday','Thrursday','Friday')
+    engineers=[morning_shift, second_shift, third_shift]
     with open("MESS.txt", "w+") as f:
-        f.write("Morning Shift\n")
-        f.write("-----------------\n")
-        f.write("Monday\n")
-        f.write("*****************\n")
-        for name in morning_shift:
-            f.write(name + "\n")
-        f.write("\n")
-        f.write("Tuesday\n")
-        f.write("*****************\n")
-        morning_shift = shift_rotate(morning_shift, 2)
-        for name in morning_shift:
-            f.write(name +"\n")
-        f.write("\n")
-        f.write("Wednesday\n")
-        f.write("*****************\n")
-        morning_shift = shift_rotate(morning_shift, 2)
-        for name in morning_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Thursday\n")
-        f.write("*****************\n")
-        morning_shift = shift_rotate(morning_shift, 2)
-        for name in morning_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Friday\n")
-        f.write("*****************\n")
-        morning_shift = shift_rotate(morning_shift, 2)
-        for name in morning_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("\n")
-
-        f.write("2nd Shift\n")
-        f.write("-----------------\n")
-        f.write("Monday\n")
-        f.write("*****************\n")
-        for name in second_shift:
-            f.write(name + "\n")
-        f.write("\n")
-        f.write("Tuesday\n")
-        f.write("*****************\n")
-        second_shift = shift_rotate(second_shift, 3)
-        for name in second_shift:
-            f.write(name +"\n")
-        f.write("\n")
-        f.write("Wednesday\n")
-        f.write("*****************\n")
-        second_shift = shift_rotate(second_shift, 3)
-        for name in second_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Thursday\n")
-        f.write("*****************\n")
-        second_shift = shift_rotate(second_shift, 3)
-        for name in second_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Friday\n")
-        f.write("*****************\n")
-        second_shift = shift_rotate(second_shift, 3)
-        for name in second_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("\n")
-
-        f.write("3rd Shift\n")
-        f.write("-----------------\n")
-        f.write("Monday\n")
-        f.write("*****************\n")
-        for name in third_shift:
-            f.write(name + "\n")
-        f.write("\n")
-        f.write("Tuesday\n")
-        f.write("*****************\n")
-        third_shift = shift_rotate(third_shift, 3)
-        for name in third_shift:
-            f.write(name +"\n")
-        f.write("\n")
-        f.write("Wednesday\n")
-        f.write("*****************\n")
-        third_shift = shift_rotate(third_shift, 3)
-        for name in third_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Thursday\n")
-        f.write("*****************\n")
-        third_shift = shift_rotate(third_shift, 3)
-        for name in third_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("Friday\n")
-        f.write("*****************\n")
-        third_shift = shift_rotate(third_shift, 3)
-        for name in third_shift:
-            f.write(name+"\n")
-        f.write("\n")
-        f.write("\n")
-
+            for i in range(0,2):
+                if i==0:
+                    rotate=2
+                else:
+                    rotate=3
+                segment=SHIFTS[i]
+                eng_shift=engineers[i]
+                f.write("{}\n-----------------\n".format(segment))
+                for day in DAYS:
+                    f.write("{}\n*****************\n".format(day))
+                    for name in eng_shift:
+                        f.write(name + "\n")
+                    f.write("\n")
+                    eng_shift = shift_rotate(eng_shift, rotate)
+                f.write("\n")
 
 
 if __name__ == "__main__":
@@ -136,8 +55,8 @@ if __name__ == "__main__":
 
         total_count = len(rtp_engineers) + len(mex_engineers)
         morning_shift_count = 12
-        second_shift_count = int((total_count-morning_shift_count)/2) + 1
-        third_shift_count = (total_count-morning_shift_count) - second_shift_count
+        second_shift_count = math.floor((total_count-morning_shift_count)/2 + 1)
+        third_shift_count = total_count - morning_shift_count - second_shift_count
 
         with open("MESS.txt", "r") as f:
             previous_morning_shift = []
