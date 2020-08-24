@@ -24,7 +24,7 @@ def shift_rotate(shift, rotation_number):
 
 def print_to_file_shift(morning_shift, second_shift, third_shift):
     SHIFTS=("Morning Shift", "2nd Shift", "3rd Shift")
-    DAYS=('Monday','Tuesday','Wednesday','Thrursday','Friday')
+    DAYS=('Monday','Tuesday','Wednesday','Thursday','Friday')
     engineers=[morning_shift, second_shift, third_shift]
     with open("MESS.txt", "w+") as f:
             for i in range(0,2):
